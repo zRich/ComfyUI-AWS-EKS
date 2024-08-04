@@ -20,7 +20,9 @@ export default class BlueprintConstruct {
             iam.ManagedPolicy.fromAwsManagedPolicyName("AmazonEKSWorkerNodePolicy"),
             iam.ManagedPolicy.fromAwsManagedPolicyName("AmazonEC2ContainerRegistryReadOnly"),
             iam.ManagedPolicy.fromAwsManagedPolicyName("AmazonSSMManagedInstanceCore"),
-            iam.ManagedPolicy.fromAwsManagedPolicyName("AmazonS3FullAccess")
+            // iam.ManagedPolicy.fromAwsManagedPolicyName("AmazonS3FullAccess")
+            // efs policy
+            iam.ManagedPolicy.fromAwsManagedPolicyName("AmazonElasticFileSystemClientReadWriteAccess"),
         ]);
 
         // Add-ons
