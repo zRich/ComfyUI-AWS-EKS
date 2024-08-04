@@ -13,6 +13,6 @@ const props = { env: { account, region } };
 
 new BlueprintConstruct(app, props);
 new CloudFrontEntry(app, "CloudFrontEntry", props);
-new LambdaModelsSync(app, "LambdaModelsSync", props);
-new S3Storage(app, "S3Storage", props);
+// new LambdaModelsSync(app, "LambdaModelsSync", props);
+// new S3Storage(app, "S3Storage", props);
 new ComfyuiEcrRepo(app, "ComfyuiEcrRepo", props);

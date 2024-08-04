@@ -31,6 +31,7 @@ export default class BlueprintConstruct {
         const addOns: Array<blueprints.ClusterAddOn> = [
             new blueprints.addons.AwsLoadBalancerControllerAddOn(),
             new blueprints.addons.SSMAgentAddOn(),
+            new blueprints.addons.EfsCsiDriverAddOn(),
             karpenterAddOn,
             new blueprints.GpuOperatorAddon({
                 values:{

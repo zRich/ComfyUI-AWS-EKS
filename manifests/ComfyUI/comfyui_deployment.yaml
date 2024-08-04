@@ -13,30 +13,39 @@ spec:
         app: comfyui
     spec:
       volumes:
-      - name: stable-diffusion-models
-        hostPath:
-          path: /comfyui-models # Need to sync all models in node's user-data
-      - name: comfyui-inputs
-        persistentVolumeClaim:
-          claimName: comfyui-inputs-pvc # Need to apply sd-inputs-s3.yaml first
-      - name: comfyui-outputs
-        persistentVolumeClaim:
-          claimName: comfyui-outputs-pvc # Need to apply sd-outputs-s3.yaml first
+        - name: stable-diffusion-models
+          persistentVolumeClaim:
+            claimName: stable-diffusion-models-pvc # Need to apply sd-models-efs.yaml first
+        - name: comfyui-users
+          persistentVolumeClaim:
+            claimName: comfyui-users-pvc # Need to apply sd-users-efs.yaml first
       containers:
-      - name: comfyui
-        image: 123456789012.dkr.ecr.us-west-2.amazonaws.com/comfyui-images:latest
-        imagePullPolicy: Always
-        ports:
-        - containerPort: 8848
-        volumeMounts:
-        - mountPath: /app/ComfyUI/models
-          name: stable-diffusion-models
-        - mountPath: /app/ComfyUI/input
-          name: comfyui-inputs
-        - mountPath: /app/ComfyUI/output
-          name: comfyui-outputs
-        resources:
-          requests:
-            nvidia.com/gpu: 1
-          limits:
-            nvidia.com/gpu: 1
+        - name: comfyui
+          image: 123456789012.dkr.ecr.us-west-2.amazonaws.com/comfyui-images:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8848
+          volumeMounts:
+            - mountPath: /app/ComfyUI/models # readonly models
+              name: stable-diffusion-models
+            - mountPath: /app/ComfyUI/users
+              name: comfyui-users
+              subPath: user
+            - mountPath: /app/ComfyUI/input
+              name: comfyui-users
+              subPath: input
+            - mountPath: /app/ComfyUI/output
+              name: comfyui-users
+              subPath: output
+            - mountPath: /app/ComfyUI/temp
+              name: comfyui-users
+              subPath: temp
+          resources:
+            requests:
+              nvidia.com/gpu: 1 # g5.2xlarge
+              memory: "4Gi"
+              cpu: "2000m"
+            limits:
+              nvidia.com/gpu: 1
+              memory: "4Gi"
+              cpu: "2000m"
