@@ -1,5 +1,57 @@
 # Stable Diffusion on EKS
 
+## 1. 安装必须软件
+
+基本包
+
+```shell
+sudo apt-get update
+sudo apt install -y curl g++ libssl-dev openssl cmake git build-essential autoconf texinfo flex patch bison libgmp-dev zlib1g-dev unzip uidmap
+sudo apt-get -y install git binutils rustc cargo pkg-config libssl-dev
+git clone https://github.com/aws/efs-utils
+cd efs-utils
+./build-deb.sh
+sudo apt-get -y install ./build/amazon-efs-utils*deb
+```
+
+Docker
+
+```shell
+ curl -fsSL https://get.docker.com -o get-docker.sh
+ sudo sh get-docker.sh
+ dockerd-rootless-setuptool.sh install
+ ```
+
+AWS CLI
+
+```shell
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+unzip awscliv2.zip
+sudo ./aws/install
+```
+
+NVM
+
+```shell
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.0/install.sh | bash
+```
+
+Node
+
+```shell
+nvm install 20 --lts
+```
+
+## 配置 AWS 账号
+
+需要用到 AWS Access Key，如果没有先登录到AWS网站创建。
+
+AWS Credentials
+
+```shell
+asw configure
+```
+
 ## 1. 构建镜像
 
 下载 ComfyUI 到 comfyui_image 目录
