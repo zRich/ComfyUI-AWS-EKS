@@ -6,8 +6,9 @@ RUN apt-get update && apt-get install -y \
     git \
     python3.11 \
     python3-pip \
+    python3.10-venv \
     # ffmpeg
     ffmpeg
 
 # Create a python virtual environment, path: /app, python version: 3.11.8
-RUN python3 -m venv /app
+RUN python3 -m venv /app/Comfyui

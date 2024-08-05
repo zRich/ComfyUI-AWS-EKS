@@ -7,6 +7,12 @@
 ```shell
 sudo apt-get update
 sudo apt install -y curl g++ libssl-dev openssl cmake git build-essential autoconf texinfo flex patch bison libgmp-dev zlib1g-dev unzip uidmap
+```
+
+## 2. Optional 安装 EFS 访问工具
+
+```shell
+sudo apt install -y curl g++ libssl-dev openssl cmake git build-essential autoconf texinfo flex patch bison libgmp-dev zlib1g-dev unzip uidmap
 sudo apt-get -y install git binutils rustc cargo pkg-config libssl-dev
 git clone https://github.com/aws/efs-utils
 cd efs-utils
@@ -17,9 +23,10 @@ sudo apt-get -y install ./build/amazon-efs-utils*deb
 Docker
 
 ```shell
- curl -fsSL https://get.docker.com -o get-docker.sh
- sudo sh get-docker.sh
- dockerd-rootless-setuptool.sh install
+cd ~
+curl -fsSL https://get.docker.com -o get-docker.sh
+sudo sh get-docker.sh
+dockerd-rootless-setuptool.sh install
  ```
 
 AWS CLI
@@ -39,7 +46,9 @@ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.0/install.sh | bash
 Node
 
 ```shell
+source ~/.bashrc
 nvm install 20 --lts
+npm i -g yarn
 ```
 
 ## 配置 AWS 账号
@@ -49,7 +58,7 @@ nvm install 20 --lts
 AWS Credentials
 
 ```shell
-asw configure
+aws configure
 ```
 
 ## 1. 构建镜像
@@ -59,6 +68,6 @@ asw configure
 通过在 Dockerfile 中使用 RUN 命令来安装 custom nodes 和依赖，需要先找到缺失的 custom nodes 的 Github 地址
 
 ```shell
-region="us-west-2" # Modify the region to your current region.
+export region="us-west-2" # Modify the region to your current region.
 cd ~/comfyui-on-eks/comfyui_image/ && bash build_and_push.sh $region Dockerfile
 ```

@@ -13,6 +13,8 @@ sudo apt-get -y install ./build/amazon-efs-utils*deb
 
 # Create EFS Secrity Group
 
+参考 [官方手册](https://docs.aws.amazon.com/efs/latest/ug/accessing-fs-create-security-groups.html)
+
 You can use the AWS Management Console to create security groups in your VPC. To connect your Amazon EFS file system to your Amazon EC2 instance, you must create two security groups: one for your Amazon EC2 instance and another for your Amazon EFS mount target.
 
 Create two security groups in your VPC. For instructions, see Create a security group in the Amazon VPC User Guide.
@@ -33,5 +35,5 @@ To view the security groups associated with your file systems mount targets, in 
 ## Mount EFS from Ubuntu EC2 
 
 ```bash
-sudo mount -t nfs4 -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport fs-00a4be99cf9a37ca3.efs.us-west-2.amazonaws.com:/ /home/ubuntu/efs
+sudo mount -t nfs4 -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport fs-0d91f2f3f42f755f4.efs.us-west-2.amazonaws.com:/ /home/ubuntu/efs
 ```

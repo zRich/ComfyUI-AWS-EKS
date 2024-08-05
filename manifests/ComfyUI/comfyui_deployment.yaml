@@ -13,6 +13,9 @@ spec:
         app: comfyui
     spec:
       volumes:
+        - name: stable-diffusion-runtime
+          persistentVolumeClaim:
+            claimName: stable-diffusion-runtime-pvc # Need to apply sd-runtime-efs.yaml first
         - name: stable-diffusion-models
           persistentVolumeClaim:
             claimName: stable-diffusion-models-pvc # Need to apply sd-models-efs.yaml first
@@ -21,11 +24,13 @@ spec:
             claimName: comfyui-users-pvc # Need to apply sd-users-efs.yaml first
       containers:
         - name: comfyui
-          image: 123456789012.dkr.ecr.us-west-2.amazonaws.com/comfyui-images:latest
+          image: 366078012615.dkr.ecr.us-west-2.amazonaws.com/comfyui-images:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 8848
           volumeMounts:
+            - mountPath: /app/ComfyUI
+              name: stable-diffusion-runtime
             - mountPath: /app/ComfyUI/models # readonly models
               name: stable-diffusion-models
             - mountPath: /app/ComfyUI/users
