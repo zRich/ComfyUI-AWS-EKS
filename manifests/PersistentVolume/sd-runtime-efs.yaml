@@ -14,7 +14,7 @@ spec:
 kind: StorageClass
 apiVersion: storage.k8s.io/v1
 metadata:
-  name: stable-diffusion-runtime
+  name: stable-diffusion-runtime-sc
 provisioner: efs.csi.aws.com
 parameters:
   provisioningMode: efs-us-west-2

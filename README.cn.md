@@ -80,7 +80,8 @@ cd ~/comfyui-on-eks/comfyui_image/ && bash build_and_push.sh $region Dockerfile
 curl -O https://s3.us-west-2.amazonaws.com/amazon-eks/1.29.6/2024-07-12/bin/linux/amd64/kubectl
 chmod +x ./kubectl
 mkdir -p $HOME/bin && cp ./kubectl $HOME/bin/kubectl && export PATH=$HOME/bin:$PATH
-
+echo 'source <(kubectl completion bash)' >>~/.bashrc
+source ~/.bashrc
 ```
 
 ## 安装 eksctl
