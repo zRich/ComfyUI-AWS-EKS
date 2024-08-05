@@ -1,22 +1,47 @@
+# define storage class, efs file system ID, and directory permissions
+kind: StorageClass
+apiVersion: storage.k8s.io/v1
+metadata:
+  name: stable-diffusion-runtime-sc
+  annotations:
+    storageclass.kubernetes.io/is-default-class: "true"
+provisioner: efs.csi.aws.com
+parameters:
+  fileSystemId: fs-0d91f2f3f42f755f4:/ComfyUI
+  directoryPerms: "755"
+---
+# define persistent volume
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: stable-diffusion-runtime-pv
+  labels:
+    type: local
+    app: comfyui
+spec:
+  storageClassName: stable-diffusion-runtime-sc
+  capacity:
+    storage: 5Gi
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  csi:
+    driver: efs.csi.aws.com
+    volumeHandle: fs-0d91f2f3f42f755f4
+    volumeAttributes:
+      availabilityZon: us-west-2a
+---
+# define persistent volume claim
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: stable-diffusion-runtime-pvc
 spec:
+  storageClassName: stable-diffusion-runtime-sc
   accessModes:
-    - ReadWriteMany # supported options: ReadWriteMany / ReadOnlyMany
-  storageClassName: stable-diffusion-runtime-sc # required for static provisioning
+    - ReadWriteMany
   resources:
     requests:
-      storage: 1200Gi # ignored, required
-  volumeName: stable-diffusion-runtime-pvc
----
-kind: StorageClass
-apiVersion: storage.k8s.io/v1
-metadata:
-  name: stable-diffusion-runtime-sc
-provisioner: efs.csi.aws.com
-parameters:
-  provisioningMode: efs-us-west-2
-  fileSystemId: fs-0d91f2f3f42f755f4:/ComfyUI # EFS file system ID
-  directoryPerms: "700"
+      storage: 5Gi
+      storageClassName: stable-diffusion-runtime-sc
+  volumeName: stable-diffusion-runtime-pv
