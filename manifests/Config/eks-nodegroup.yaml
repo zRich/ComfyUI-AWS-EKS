@@ -6,5 +6,5 @@ metadata:
 managedNodeGroups:
   - name: LW-NodeGroup
     launchTemplate:
-      id: AL2-MNG-LW
+      id: Comfyui-EKS-LW-Node
       version: "1"
