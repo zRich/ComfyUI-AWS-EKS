@@ -28,9 +28,9 @@ spec:
           resources:
             requests:
               nvidia.com/gpu: 1 # g5.2xlarge
-              memory: "4Gi"
-              cpu: "2000m"
+              cpu: 2
+              memory: 4Gi
             limits:
               nvidia.com/gpu: 1
-              memory: "4Gi"
-              cpu: "2000m"
+              cpu: 2
+              memory: 4Gi
