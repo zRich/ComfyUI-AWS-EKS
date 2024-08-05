@@ -16,12 +16,6 @@ spec:
         - name: stable-diffusion-runtime
           persistentVolumeClaim:
             claimName: stable-diffusion-runtime-pvc # Need to apply sd-runtime-efs.yaml first
-        - name: stable-diffusion-models
-          persistentVolumeClaim:
-            claimName: stable-diffusion-models-pvc # Need to apply sd-models-efs.yaml first
-        - name: comfyui-users
-          persistentVolumeClaim:
-            claimName: comfyui-users-pvc # Need to apply sd-users-efs.yaml first
       containers:
         - name: comfyui
           image: 366078012615.dkr.ecr.us-west-2.amazonaws.com/comfyui-images:latest
@@ -31,20 +25,6 @@ spec:
           volumeMounts:
             - mountPath: /app/ComfyUI
               name: stable-diffusion-runtime
-            - mountPath: /app/ComfyUI/models # readonly models
-              name: stable-diffusion-models
-            - mountPath: /app/ComfyUI/users
-              name: comfyui-users
-              subPath: user
-            - mountPath: /app/ComfyUI/input
-              name: comfyui-users
-              subPath: input
-            - mountPath: /app/ComfyUI/output
-              name: comfyui-users
-              subPath: output
-            - mountPath: /app/ComfyUI/temp
-              name: comfyui-users
-              subPath: temp
           resources:
             requests:
               nvidia.com/gpu: 1 # g5.2xlarge

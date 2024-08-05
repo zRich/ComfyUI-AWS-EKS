@@ -4,7 +4,7 @@ metadata:
   name: stable-diffusion-runtime-pvc
 spec:
   accessModes:
-    - ReadOnlyMany # supported options: ReadWriteMany / ReadOnlyMany
+    - ReadWriteMany # supported options: ReadWriteMany / ReadOnlyMany
   storageClassName: stable-diffusion-runtime-sc # required for static provisioning
   resources:
     requests:
