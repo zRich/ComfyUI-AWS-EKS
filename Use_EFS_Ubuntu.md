@@ -31,8 +31,12 @@ Add a rule to the mount target security group to allow inbound access from the E
 
 To view the security groups associated with your file systems mount targets, in the EFS console, choose the Network tab in the File system details page. For more information, see Managing mount targets.
 
+## Create access points
 
-## Mount EFS from Ubuntu EC2 
+[Docs](https://docs.aws.amazon.com/efs/latest/ug/create-access-point.html)
+[Code](https://github.com/kubernetes-sigs/aws-efs-csi-driver/tree/master/examples/kubernetes/access_points)
+
+## Mount EFS from Ubuntu EC2
 
 ```bash
 sudo mount -t nfs4 -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport fs-0d91f2f3f42f755f4.efs.us-west-2.amazonaws.com:/ /home/ubuntu/efs
