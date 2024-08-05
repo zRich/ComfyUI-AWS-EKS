@@ -1,0 +1,10 @@
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+metadata:
+  name: Comfyui-Cluster
+  region: us-west-2
+managedNodeGroups:
+  - name: LW-NodeGroup
+    launchTemplate:
+      id: lt-AL2-MNG-LW
+      version: "1"
