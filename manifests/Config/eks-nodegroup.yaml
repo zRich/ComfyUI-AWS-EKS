@@ -6,5 +6,5 @@ metadata:
 managedNodeGroups:
   - name: LW-NodeGroup
     launchTemplate:
-      id: lt-AL2-MNG-LW
+      id: AL2-MNG-LW
       version: "1"
