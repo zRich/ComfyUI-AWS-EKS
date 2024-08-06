@@ -7,7 +7,7 @@ metadata:
 managedNodeGroups:
   - name: SD-MNG-NG
     instanceType: g5.xlarge
-    capacityType: SPOT
+    spot: true
     minSize: 0
     maxSize: 1
     desiredCapacity: 1
@@ -21,7 +21,7 @@ managedNodeGroups:
         effect: NoSchedule
   - name: SD-STD-NG
     instanceType: g5.2xlarge
-    capacityType: SPOT
+    spot: true
     minSize: 0
     maxSize: 1
     desiredCapacity: 1
