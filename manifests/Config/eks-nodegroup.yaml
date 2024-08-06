@@ -11,10 +11,6 @@ managedNodeGroups:
     minSize: 0
     maxSize: 1
     desiredCapacity: 1
-    volumeSize: 100
-    ssh:
-      allow: false
-      publicKeyPath: ~/.ssh/id_rsa.pub
     labels:
       nodegroup: SD-MNG-NG
     tags:
@@ -29,10 +25,6 @@ managedNodeGroups:
     minSize: 0
     maxSize: 1
     desiredCapacity: 1
-    volumeSize: 100
-    ssh:
-      allow: false
-      publicKeyPath: ~/.ssh/id_rsa.pub
     labels:
       nodegroup: SD-STD-NG
     tags:
