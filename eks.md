@@ -23,3 +23,6 @@ eksctl create iamserviceaccount \
 TRUST_POLICY=$(aws iam get-role --role-name $role_name --query 'Role.AssumeRolePolicyDocument' | \
     sed -e 's/efs-csi-controller-sa/efs-csi-*/' -e 's/StringEquals/StringLike/')
 aws iam update-assume-role-policy --role-name $role_name --policy-document "$TRUST_POLICY"
+
+
+eksctl delete cluster --name Comfyui-Cluster --region us-west-2

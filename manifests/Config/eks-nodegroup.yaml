@@ -3,8 +3,44 @@ kind: ClusterConfig
 metadata:
   name: Comfyui-Cluster
   region: us-west-2
+  # SD-MNG-NG use spot instances
 managedNodeGroups:
-  - name: LW-NodeGroup
-    launchTemplate:
-      id: lt-0b1285acf39451894
-      version: "1"
+  - name: SD-MNG-NG
+    instanceType: g5.xlarge
+    capacityType: SPOT
+    minSize: 0
+    maxSize: 1
+    desiredCapacity: 1
+    volumeSize: 100
+    ssh:
+      allow: false
+      publicKeyPath: ~/.ssh/id_rsa.pub
+    labels:
+      nodegroup: SD-MNG-NG
+    tags:
+      nodegroup: SD-MNG-NG
+    taints:
+      - key: nodegroup
+        value: SD-MNG-NG
+        effect: NoSchedule
+  - name: SD-STD-NG
+    instanceType: g5.2xlarge
+    capacityType: SPOT
+    minSize: 0
+    maxSize: 1
+    desiredCapacity: 1
+    volumeSize: 100
+    ssh:
+      allow: false
+      publicKeyPath: ~/.ssh/id_rsa.pub
+    labels:
+      nodegroup: SD-STD-NG
+    tags:
+      nodegroup: SD-STD-NG
+    taints:
+      - key: nodegroup
+        value: SD-STD-NG
+        effect: NoSchedule
+      - key: nodegroup
+        value: SD-PRO-NG
+        effect: NoSchedule
