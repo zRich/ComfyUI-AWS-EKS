@@ -5,10 +5,7 @@ metadata:
   region: us-west-2
 nodeGroups:
   - name: SD-MNG-NG
-    instanceType: m5.large
+    instanceType: g5.xlarge
     desiredCapacity: 1
     minSize: 1
     maxSize: 2
-    launchTemplate:
-      version: "1"
-      id: lt-07de1904fdb331822
