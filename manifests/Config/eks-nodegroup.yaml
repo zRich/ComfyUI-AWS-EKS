@@ -6,33 +6,6 @@ metadata:
   # SD-MNG-NG use spot instances
 managedNodeGroups:
   - name: SD-MNG-NG
-    instanceType: g5.xlarge
-    spot: true
-    minSize: 0
-    maxSize: 1
-    desiredCapacity: 1
-    labels:
-      nodegroup: SD-MNG-NG
-    tags:
-      nodegroup: SD-MNG-NG
-    taints:
-      - key: nodegroup
-        value: SD-MNG-NG
-        effect: NoSchedule
-  - name: SD-STD-NG
-    instanceType: g5.2xlarge
-    spot: true
-    minSize: 0
-    maxSize: 1
-    desiredCapacity: 1
-    labels:
-      nodegroup: SD-STD-NG
-    tags:
-      nodegroup: SD-STD-NG
-    taints:
-      - key: nodegroup
-        value: SD-STD-NG
-        effect: NoSchedule
-      - key: nodegroup
-        value: SD-PRO-NG
-        effect: NoSchedule
+    launchTemplate:
+      version: 1
+      id: lt-07de1904fdb331822
