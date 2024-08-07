@@ -20,7 +20,7 @@ export default class BlueprintConstruct {
             iam.ManagedPolicy.fromAwsManagedPolicyName("AmazonEKSWorkerNodePolicy"),
             iam.ManagedPolicy.fromAwsManagedPolicyName("AmazonEC2ContainerRegistryReadOnly"),
             iam.ManagedPolicy.fromAwsManagedPolicyName("AmazonSSMManagedInstanceCore"),
-            // iam.ManagedPolicy.fromAwsManagedPolicyName("AmazonS3FullAccess")
+            iam.ManagedPolicy.fromAwsManagedPolicyName("AmazonS3FullAccess"),
             // efs policy
             iam.ManagedPolicy.fromAwsManagedPolicyName("AmazonElasticFileSystemClientReadWriteAccess"),
         ]);
@@ -95,13 +95,14 @@ export default class BlueprintConstruct {
 // Node Group for lightweight workloads
 function addLightWeightNodeGroup(): blueprints.ManagedNodeGroup {
     return {
-        id: "AL2-MNG-LW",
+        id: "sd-STD-NG",
         amiType: NodegroupAmiType.AL2_X86_64_GPU,
         instanceTypes: [new ec2.InstanceType('g5.xlarge')],
         nodeRole: blueprints.getNamedResource("node-role") as iam.Role,
         minSize: 1,
         desiredSize: 1,
         maxSize: 2,
+        nodeGroupCapacityType: CapacityType.SPOT,
         nodeGroupSubnets: { subnetType: ec2.SubnetType.PRIVATE_WITH_EGRESS },
     };
 }
