@@ -96,12 +96,12 @@ export default class BlueprintConstruct {
 function addLightWeightNodeGroup(): blueprints.ManagedNodeGroup {
     return {
         id: "AL2-MNG-LW",
-        amiType: NodegroupAmiType.AL2_X86_64,
-        instanceTypes: [new ec2.InstanceType('t3a.xlarge')],
+        amiType: NodegroupAmiType.AL2_X86_64_GPU,
+        instanceTypes: [new ec2.InstanceType('g5.xlarge')],
         nodeRole: blueprints.getNamedResource("node-role") as iam.Role,
         minSize: 1,
-        desiredSize: 2,
-        maxSize: 5,
+        desiredSize: 1,
+        maxSize: 2,
         nodeGroupSubnets: { subnetType: ec2.SubnetType.PRIVATE_WITH_EGRESS },
         launchTemplate: {
             tags: {
