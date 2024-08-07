@@ -103,10 +103,5 @@ function addLightWeightNodeGroup(): blueprints.ManagedNodeGroup {
         desiredSize: 1,
         maxSize: 2,
         nodeGroupSubnets: { subnetType: ec2.SubnetType.PRIVATE_WITH_EGRESS },
-        launchTemplate: {
-            tags: {
-                "Name": "Comfyui-EKS-LW-Node",
-            }
-        }
     };
 }

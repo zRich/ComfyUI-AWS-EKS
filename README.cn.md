@@ -32,6 +32,7 @@ dockerd-rootless-setuptool.sh install
 AWS CLI
 
 ```shell
+cd ~
 curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
 unzip awscliv2.zip
 sudo ./aws/install
@@ -40,12 +41,14 @@ sudo ./aws/install
 NVM
 
 ```shell
+cd ~
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.0/install.sh | bash
 ```
 
 Node
 
 ```shell
+cd ~
 source ~/.bashrc
 nvm install 20 --lts
 npm i -g yarn
@@ -59,6 +62,12 @@ AWS Credentials
 
 ```shell
 aws configure
+```
+
+## 按照 CDK
+
+```shell
+npm install -g aws-cdk
 ```
 
 ## 1. 构建镜像
