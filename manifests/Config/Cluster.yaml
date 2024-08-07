@@ -1,11 +1,33 @@
 apiVersion: eksctl.io/v1alpha5
 kind: ClusterConfig
+
 metadata:
   name: Comfyui-Cluster
   region: us-west-2
-nodeGroups:
-  - name: SD-MNG-NG
-    instanceType: g5.xlarge
+
+managedNodeGroups:
+  - name: sd-mng-ng
+    instanceType: g5.large
     desiredCapacity: 1
-    minSize: 1
-    maxSize: 2
+
+iam:
+  withOIDC: true
+  serviceAccounts:
+  - metadata:
+      name: aws-load-balancer-controller
+      namespace: kube-system
+    wellKnownPolicies:
+      awsLoadBalancerController: true
+
+addons:
+  - name: aws-ebs-csi-driver
+    wellKnownPolicies: # Adds an IAM service account
+      ebsCSIController: true
+  - name: aws-efs-csi-driver
+    wellKnownPolicies: # Adds an IAM service account
+      efsCSIController: true
+      
+cloudWatch:
+ clusterLogging:
+   enableTypes: ["*"]
+   logRetentionInDays: 30

@@ -26,3 +26,8 @@ aws iam update-assume-role-policy --role-name $role_name --policy-document "$TRU
 
 
 eksctl delete cluster --name Comfyui-Cluster --region us-west-2
+
+
+## 20240807
+
+eksctl create cluster --name Comfyui-Cluster --region us-west-2 --version 1.29 --without-nodegroup
