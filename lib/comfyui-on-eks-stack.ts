@@ -96,7 +96,7 @@ export default class BlueprintConstruct {
 function addLightWeightNodeGroup(): blueprints.ManagedNodeGroup {
     return {
         id: "TEST-NG",
-        amiType: NodegroupAmiType.AL2_X86_64_GPU,
+        amiType: NodegroupAmiType.AL2_X86_64,
         instanceTypes: [new ec2.InstanceType('t3.small')],
         nodeRole: blueprints.getNamedResource("node-role") as iam.Role,
         minSize: 1,
