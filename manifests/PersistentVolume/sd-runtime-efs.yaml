@@ -2,34 +2,22 @@
 kind: StorageClass
 apiVersion: storage.k8s.io/v1
 metadata:
-  name: stable-diffusion-runtime-sc
+  name: sd-std-runtime-sc
 provisioner: efs.csi.aws.com
----
-# define persistent volume
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: stable-diffusion-runtime-pv
-spec:
-  capacity:
-    storage: 1200Gi # ignored, required
-  accessModes:
-    - ReadWriteMany # supported options: ReadWriteMany / ReadOnlyMany
-  storageClassName: stable-diffusion-runtime-sc
-  persistentVolumeReclaimPolicy: Retain
-  csi:
-    driver: efs.csi.aws.com
-    volumeHandle: fs-0d91f2f3f42f755f4:/ComfyUI # efs file system ID
 ---
 # define persistent volume claim
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: stable-diffusion-runtime-pvc
+  name: sd-std-runtime-pvc
 spec:
-  storageClassName: stable-diffusion-runtime-sc
+  storageClassName: sd-std-runtime-sc
   accessModes:
     - ReadWriteMany
+  volumeMode: Filesystem
+  dataSource:
+    name: sd-std-runtime-pv
+    kind: AWSElasticsFilesystem
   resources:
     requests:
-      storage: 1200Gi
+      storage: 120Gi

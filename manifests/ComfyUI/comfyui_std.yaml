@@ -1,21 +1,22 @@
+# comfyui standard instance, g5.2xlarge
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: comfyui
+  name: comfyui-std
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: comfyui
+      app: comfyui-std
   template:
     metadata:
       labels:
-        app: comfyui
+        app: comfyui-std
     spec:
       volumes:
-        - name: stable-diffusion-runtime
+        - name: sd-std-runtime
           persistentVolumeClaim:
-            claimName: stable-diffusion-runtime-pvc # Need to apply sd-runtime-efs.yaml first
+            claimName: sd-std-runtime-pvc # Need to apply sd-runtime-efs.yaml first
       containers:
         - name: comfyui
           image: 366078012615.dkr.ecr.us-west-2.amazonaws.com/comfyui-images:latest
@@ -24,7 +25,7 @@ spec:
             - containerPort: 8848
           volumeMounts:
             - mountPath: /app/ComfyUI
-              name: stable-diffusion-runtime
+              name: sd-std-runtime
           resources:
             requests:
               nvidia.com/gpu: 1 # g5.2xlarge

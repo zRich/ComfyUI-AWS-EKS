@@ -65,7 +65,7 @@ export default class BlueprintConstruct {
         ];
 
         const clusterProvider = new blueprints.GenericClusterProvider({
-            version: KubernetesVersion.V1_29,
+            version: KubernetesVersion.V1_30,
             tags: {
                 "Name": "comfyui-eks-cluster",
                 "Type": "generic-cluster"
